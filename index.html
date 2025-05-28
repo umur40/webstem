@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Umur Yağmur - Fizik Öğretmeni</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --primary: #4361ee;
+      --primary-light: #4cc9f0;
+      --secondary: #3a0ca3;
+      --accent: #f72585;
+      --light: #f8f9fa;
+      --dark: #212529;
+      --gray: #6c757d;
+      --white: #ffffff;
+      --dark-bg: #121212;
+      --dark-card: #1e1e1e;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      line-height: 1.7;
+      color: var(--dark);
+      background-color: var(--light);
+      transition: all 0.5s ease;
+      overflow-x: hidden;
+    }
+    
+    body.dark {
+      background-color: var(--dark-bg);
+      color: var(--light);
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    /* Header Styles */
+    header {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: var(--white);
+      padding: 1.2rem 0;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      animation: slideDown 0.8s ease;
+    }
+    
+    header .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    header h1 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      background: linear-gradient(to right, var(--white), var(--primary-light));
+      
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .subtitle {
+      font-size: 0.8rem;
+      opacity: 0.8;
+      margin-top: 0.2rem;
+    }
+    
+    /* Navigation */
+    nav {
+      display: flex;
+      gap: 1rem;
+    }
+    
+    nav a {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0.4rem 0.8rem;
+      border-radius: 50px;
+      transition: all 0.3s ease;
+      position: relative;
+      font-size: 0.9rem;
+    }
+    
+    nav a:hover {
+      background-color: rgba(255,255,255,0.2);
+      transform: translateY(-2px);
+    }
+    
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background: var(--primary-light);
+      transition: all 0.3s ease;
+    }
+    
+    nav a:hover::after {
+      width: 70%;
+      left: 15%;
+    }
+    
+    /* Theme Toggle */
+    .theme-toggle {
+      background: transparent;
+      border: none;
+      color: var(--white);
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      margin-left: 0.8rem;
+    }
+    
+    .theme-toggle:hover {
+      transform: rotate(30deg) scale(1.1);
+    }
+    
+    /* Hero Section */
+    .hero {
+      display: flex;
+      align-items: center;
+      min-height: 100vh;
+      padding-top: 80px;
+      padding-bottom: 60px;
+      position: relative;
+    }
+    
+    .hero-text {
+      flex: 1;
+      padding-right: 2rem;
+      animation: fadeInLeft 1s ease;
+    }
+    
+    .hero-text h2 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      line-height: 1.2;
+      background: linear-gradient(to right, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .hero-text p {
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+      color: var(--gray);
+      max-width: 600px;
+    }
+    
+    body.dark .hero-text p {
+      color: rgba(255,255,255,0.8);
+    }
+    
+    .btn {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: var(--white);
+      padding: 0.8rem 1.8rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(67, 97, 238, 0.4);
+    }
+    
+    .btn::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(
+        to bottom right,
+        rgba(255, 255, 255, 0.3),
+        rgba(255, 255, 255, 0)
+      );
+      transform: translateX(-100%) rotate(45deg);
+      transition: transform 0.6s ease;
+    }
+    
+    .btn:hover::after {
+      transform: translateX(100%) rotate(45deg);
+    }
+    
+    /* Hero Animation */
+    .hero-animation {
+      flex: 1;
+      position: relative;
+      height: 400px;
+      min-height: 300px;
+      animation: fadeInRight 1s ease;
+    }
+    
+    .physics-lab {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80') center/cover;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    }
+    
+    .physics-lab::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(67, 97, 238, 0.7), rgba(58, 12, 163, 0.7));
+    }
+    
+    /* Atom Animation */
+    .atom-container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 180px;
+      height: 180px;
+    }
+    
+    .nucleus {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 30px;
+      height: 30px;
+      background-color: var(--primary-light);
+      border-radius: 50%;
+      box-shadow: 0 0 15px var(--primary-light);
+      animation: pulse 2s infinite;
+    }
+    
+    .orbit {
+      position: absolute;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-radius: 50%;
+    }
+    
+    .orbit1 {
+      width: 100px;
+      height: 100px;
+      top: 40px;
+      left: 40px;
+      animation: rotate 15s linear infinite;
+    }
+    
+    .orbit2 {
+      width: 150px;
+      height: 150px;
+      top: 15px;
+      left: 15px;
+      animation: rotate 20s linear infinite reverse;
+    }
+    
+    .electron {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background-color: var(--accent);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--accent);
+    }
+    
+    .electron1 {
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    
+    .electron2 {
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    
+    .electron3 {
+      top: 50%;
+      right: 10px;
+      transform: translateY(-50%);
+    }
+    
+    /* Features Section */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      padding: 3rem 0;
+    }
+    
+    .feature {
+      background-color: var(--white);
+      padding: 1.8rem;
+      border-radius: 15px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+      transition: all 0.4s ease;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+    
+    body.dark .feature {
+      background-color: var(--dark-card);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+    }
+    
+    .feature:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+    }
+    
+    body.dark .feature:hover {
+      box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+    }
+    
+    .feature::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(90deg, var(--accent), var(--primary-light));
+    }
+    
+    .feature h3 {
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+    
+    .feature p {
+      color: var(--gray);
+      font-size: 0.95rem;
+    }
+    
+    body.dark .feature p {
+      color: rgba(255,255,255,0.7);
+    }
+    
+    /* New Animations */
+    .floating-icons {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: -1;
+      overflow: hidden;
+    }
+    
+    .floating-icon {
+      position: absolute;
+      opacity: 0.1;
+      color: var(--primary);
+      font-size: 1.5rem;
+      animation: float 15s linear infinite;
+    }
+    
+    body.dark .floating-icon {
+      color: var(--primary-light);
+      opacity: 0.08;
+    }
+    
+  
+    body.dark .physics-demo {
+      background: linear-gradient(135deg, rgba(67,97,238,0.1), rgba(247,37,133,0.1));
+    }
+    
+    .physics-demo h2 {
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
+      color: var(--primary);
+    }
+    
+    .demo-container {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    
+    .demo-box {
+      flex: 1;
+      min-width: 250px;
+      background-color: var(--white);
+      border-radius: 15px;
+      padding: 1.5rem;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    body.dark .demo-box {
+      background-color: var(--dark-card);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+    }
+    
+    .demo-box:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+    }
+    
+    .demo-title {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      color: var(--secondary);
+    }
+    
+    /* Pendulum Animation */
+    .pendulum-container {
+      height: 200px;
+      position: relative;
+      margin: 1rem 0;
+    }
+    
+    .pendulum {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 2px;
+      height: 180px;
+      background-color: var(--gray);
+      transform-origin: top center;
+      animation: swing 3s ease-in-out infinite alternate;
+    }
+    
+    .pendulum-ball {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 25px;
+      height: 25px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      border-radius: 50%;
+      transform: translateX(-50%);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    
+    /* Wave Animation */
+    .wave-container {
+      height: 120px;
+      position: relative;
+      margin: 1rem 0;
+      overflow: hidden;
+    }
+    
+    .wave {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 200%;
+      height: 100%;
+      background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1200 120" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" fill="%234361ee" opacity=".25"/><path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" fill="%234361ee" opacity=".5"/><path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" fill="%234361ee"/></svg>') repeat-x;
+      background-size: 50% 100%;
+      animation: wave 10s linear infinite;
+    }
+    
+    body.dark .wave {
+      opacity: 0.7;
+    }
+    
+    /* Gravity Animation */
+    .gravity-container {
+      height: 150px;
+      position: relative;
+      margin: 1rem 0;
+    }
+    
+    .gravity-ball {
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      background: linear-gradient(135deg, var(--accent), #b5179e);
+      border-radius: 50%;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: bounce 2s cubic-bezier(0.28, 0.84, 0.42, 0.96) infinite;
+      box-shadow: 0 5px 15px rgba(247, 37, 133, 0.3);
+    }
+    
+    /* Footer */
+    footer {
+      background: linear-gradient(135deg, var(--secondary), var(--dark));
+      color: var(--white);
+      text-align: center;
+      padding: 2.5rem 0;
+      margin-top: 4rem;
+    }
+    
+    footer a {
+      color: var(--primary-light);
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    
+    footer a:hover {
+      color: var(--white);
+      text-decoration: underline;
+    }
+    
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+    
+    .social-links a {
+      color: var(--white);
+      font-size: 1.3rem;
+      transition: all 0.3s ease;
+    }
+    
+    .social-links a:hover {
+      transform: translateY(-3px);
+      color: var(--primary-light);
+    }
+    
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    @keyframes fadeInLeft {
+      from { opacity: 0; transform: translateX(-20px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    
+    @keyframes fadeInRight {
+      from { opacity: 0; transform: translateX(20px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    
+    @keyframes pulse {
+      0% { transform: translate(-50%, -50%) scale(1); }
+      50% { transform: translate(-50%, -50%) scale(1.1); }
+      100% { transform: translate(-50%, -50%) scale(1); }
+    }
+    
+    @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    
+    @keyframes swing {
+      0% { transform: translateX(-50%) rotate(-20deg); }
+      100% { transform: translateX(-50%) rotate(20deg); }
+    }
+    
+    @keyframes bounce {
+      0%, 100% { transform: translate(-50%, 0); }
+      50% { transform: translate(-50%, 120px); }
+    }
+    
+    @keyframes wave {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    
+    @keyframes float {
+      0% { transform: translate(0, 0) rotate(0deg); opacity: 0; }
+      10% { opacity: 0.1; }
+      100% { transform: translate(100vw, -100vh) rotate(720deg); opacity: 0; }
+    }
+    
+    @keyframes slideDown {
+      from { transform: translateY(-100%); }
+      to { transform: translateY(0); }
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 992px) {
+      .hero {
+        flex-direction: column;
+        text-align: center;
+        padding-top: 100px;
+      }
+      
+      .hero-text {
+        padding-right: 0;
+        margin-bottom: 3rem;
+      }
+      
+      .hero-text h2 {
+        font-size: 2.2rem;
+      }
+      
+      .hero-animation {
+        width: 100%;
+        height: 300px;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 1.4rem;
+      }
+      
+      .subtitle {
+        font-size: 0.7rem;
+      }
+      
+      nav a {
+        font-size: 0.8rem;
+        padding: 0.3rem 0.6rem;
+      }
+      
+      .hero-text h2 {
+        font-size: 1.8rem;
+      }
+      
+      .hero-text p {
+        font-size: 1rem;
+      }
+      
+      .features {
+        grid-template-columns: 1fr;
+      }
+      
+      .demo-container {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div>
+        <h1>Umur Yağmur</h1>
+        <p class="subtitle">Fizik Öğretmeni & Eğitimci</p>
+      </div>
+      <nav>
+        <a href="index.html">Ana Sayfa</a>
+        <a href="dersler.html">Dersler</a>
+        <a href="blog.html">Blog</a>
+        <a href="iletisim.html">İletişim</a>
+      </nav>
+      <button class="theme-toggle" onclick="toggleTheme()">
+        <span class="toggle-icon">🌙</span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <div class="floating-icons">
+      <div class="floating-icon" style="top: 10%; left: 5%; animation-delay: 0s;"><i class="fas fa-atom"></i></div>
+      <div class="floating-icon" style="top: 20%; left: 15%; animation-delay: 2s;"><i class="fas fa-rocket"></i></div>
+      <div class="floating-icon" style="top: 30%; left: 80%; animation-delay: 4s;"><i class="fas fa-lightbulb"></i></div>
+      <div class="floating-icon" style="top: 70%; left: 10%; animation-delay: 6s;"><i class="fas fa-flask"></i></div>
+      <div class="floating-icon" style="top: 80%; left: 85%; animation-delay: 8s;"><i class="fas fa-microscope"></i></div>
+    </div>
+
+    <section class="hero container">
+      <div class="hero-text">
+        <h2>Fiziğin büyülü dünyasına hoş geldiniz!</h2>
+        <p>
+          Ders notları, videolar ve blog yazılarıyla öğrenmeyi keyifli hale getiriyorum.  
+          Fizik konularını eğlenceli ve anlaşılır şekilde keşfetmek için doğru yerdesiniz.
+        </p>
+        <a href="dersler.html" class="btn">Ders Notları & Videolar</a>
+        
+        <div class="pendulum-container" style="margin-top: 2rem;">
+          <div class="pendulum">
+            <div class="pendulum-ball"></div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="hero-animation">
+        <div class="physics-lab">
+          <div class="atom-container">
+            <div class="orbit orbit1">
+              <div class="electron electron1"></div>
+            </div>
+            <div class="orbit orbit2">
+              <div class="electron electron2"></div>
+              <div class="electron electron3"></div>
+            </div>
+            <div class="nucleus"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="physics-demo container">
+      <h2>Fizik Animasyonlarıyla Öğrenin</h2>
+      <p>Fizik prensiplerini interaktif animasyonlarla keşfedin</p>
+      
+      <div class="demo-container">
+        <div class="demo-box">
+          <h3 class="demo-title">Dalga Hareketi</h3>
+          <div class="wave-container">
+            <div class="wave"></div>
+          </div>
+          <p>Dalgaların nasıl yayıldığını gözlemleyin</p>
+        </div>
+        
+        <div class="demo-box">
+          <h3 class="demo-title">Yer Çekimi</h3>
+          <div class="gravity-container">
+            <div class="gravity-ball"></div>
+          </div>
+          <p>Serbest düşme hareketini simüle edin</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="features container">
+      <div class="feature">
+        <h3><i class="fas fa-book-open"></i> Güncel Ders Notları</h3>
+        <p>9-12. sınıf müfredatını kapsayan, renkli diyagramlarla desteklenmiş PDF ders notları.</p>
+      </div>
+      <div class="feature">
+        <h3><i class="fas fa-video"></i> Öğretici Videolar</h3>
+        <p>Youtube kanalımda konuları adım adım anlattığım, deneylerle desteklenmiş videolar.</p>
+      </div>
+      <div class="feature">
+        <h3><i class="fas fa-pen-fancy"></i> Blog Yazıları</h3>
+        <p>Günlük hayattaki fizik olaylarını açıkladığım, merak uyandıran içerikler.</p>
+      </div>
+    </section>
+    
+    <section class="container" style="padding-bottom: 4rem; text-align: center;">
+      <h2 style="font-size: 1.8rem; margin-bottom: 1.5rem; color: var(--primary);">Fizik Dünyasını Keşfedin</h2>
+      <p style="max-width: 800px; margin: 0 auto 2rem; color: var(--gray);">
+        Fizik sadece formüllerden ibaret değil! Günlük hayatımızda karşılaştığımız pek çok olayın arkasında fizik yasaları yatıyor. 
+        Bu büyülü dünyayı birlikte keşfedelim.
+      </p>
+      <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+        <a href="blog.html#gokkusagi" class="btn" style="background: linear-gradient(135deg, var(--accent), #b5179e);">Gökkuşağı Bilimi</a>
+        <a href="blog.html#ucaklar" class="btn" style="background: linear-gradient(135deg, var(--primary-light), #4895ef);">Uçaklar Nasıl Uçar?</a>
+        <a href="blog.html#kuantum" class="btn" style="background: linear-gradient(135deg, #560bad, #3a0ca3);">Kuantum Dünyası</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 Umur Yağmur | <a href="https://www.youtube.com/@yulismayagmur" target="_blank" rel="noopener noreferrer">YouTube Kanalım</a></p>
+      <div class="social-links">
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+        <a href="#"><i class="fab fa-github"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Tema değiştirme fonksiyonu
+    function toggleTheme() {
+      document.body.classList.toggle('dark');
+      localStorage.setItem('theme', document.body.classList.contains('dark') ? 'dark' : 'light');
+      
+      // Tema ikonunu değiştir
+      const icon = document.querySelector('.toggle-icon');
+      if (document.body.classList.contains('dark')) {
+        icon.textContent = '☀️';
+      } else {
+        icon.textContent = '🌙';
+      }
+    }
+
+    // Sayfa yüklendiğinde kullanıcı tercihini uygula
+    document.addEventListener('DOMContentLoaded', () => {
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'dark') {
+        document.body.classList.add('dark');
+        document.querySelector('.toggle-icon').textContent = '☀️';
+      }
+      
+      // Scroll animasyonları
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animated');
+          }
+        });
+      }, { threshold: 0.1 });
+
+      document.querySelectorAll('.feature, .demo-box').forEach(element => {
+        observer.observe(element);
+      });
+      
+      // Floating icons
+      createFloatingIcons();
+    });
+    
+    // Daha fazla floating icon oluştur
+    function createFloatingIcons() {
+      const icons = ['atom', 'rocket', 'lightbulb', 'flask', 'microscope', 'calculator', 'brain', 'chart-line'];
+      const container = document.querySelector('.floating-icons');
+      
+      for (let i = 0; i < 10; i++) {
+        const icon = document.createElement('div');
+        icon.className = 'floating-icon';
+        icon.innerHTML = `<i class="fas fa-${icons[Math.floor(Math.random() * icons.length)]}"></i>`;
+        
+        // Rastgele pozisyon ve animasyon süresi
+        icon.style.left = `${Math.random() * 100}%`;
+        icon.style.top = `${Math.random() * 100}%`;
+        icon.style.animationDelay = `${Math.random() * 10}s`;
+        icon.style.animationDuration = `${15 + Math.random() * 20}s`;
+        icon.style.fontSize = `${1 + Math.random() * 1.5}rem`;
+        
+        container.appendChild(icon);
+      }
+    }
+  </script>
+</body>
+</html>
