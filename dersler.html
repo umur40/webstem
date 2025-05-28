@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fizik Konuları - Umur Yağmur</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3a0ca3;
+            --accent: #f72585;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #4cc9f0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+            position: relative;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            background-color: rgba(255,255,255,0.1);
+            border: 2px solid rgba(255,255,255,0.2);
+        }
+        
+        nav a:hover {
+            background-color: rgba(255,255,255,0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        main {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        
+        .sinif-baslik {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: var(--primary);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            margin: 2rem 0 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .sinif-baslik:hover {
+            background-color: var(--secondary);
+            transform: translateY(-2px);
+        }
+        
+        .sinif-baslik h2 {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+        
+        .sinif-baslik i {
+            transition: transform 0.3s ease;
+        }
+        
+        .sinif-baslik.active i {
+            transform: rotate(180deg);
+        }
+        
+        .konu-container {
+            display: none;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .konu-kart {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .konu-kart:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        }
+        
+        .konu-kart::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--accent), var(--success));
+        }
+        
+        .konu-baslik {
+            padding: 1.2rem;
+            background-color: white;
+        }
+        
+        .konu-baslik h3 {
+            color: var(--dark);
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .konu-baslik h3 i {
+            color: var(--accent);
+        }
+        
+        .alt-konular {
+            padding: 0 1.2rem 1.2rem;
+        }
+        
+        .alt-konular ul {
+            list-style-type: none;
+        }
+        
+        .alt-konular li {
+            padding: 0.4rem 0;
+            position: relative;
+            padding-left: 1.2rem;
+        }
+        
+        .alt-konular li::before {
+            content: "▹";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+        
+        footer {
+            background-color: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+        
+        .search-container {
+            max-width: 600px;
+            margin: 2rem auto;
+            position: relative;
+        }
+        
+        .search-container input {
+            width: 100%;
+            padding: 0.8rem 1.2rem;
+            border-radius: 50px;
+            border: 2px solid #ddd;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            padding-left: 3rem;
+        }
+        
+        .search-container input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(50, 69, 156, 0.2);
+        }
+        
+        .search-container i {
+            position: absolute;
+            left: 1.2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #777;
+        }
+        
+        @media (max-width: 768px) {
+            .konu-container {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1><i class="fas fa-atom"></i> Fizik Konuları</h1>
+        <nav>
+            <a href="index.html"><i class="fas fa-home"></i> Ana Sayfa</a>
+            <a href="dersler.html"><i class="fas fa-graduation-cap"></i> Dersler</a>
+            <a href="blog.html"><i class="fas fa-blog"></i> Blog</a>
+            <a href="iletisim.html"><i class="fas fa-envelope"></i> İletişim</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="search-container">
+            <i class="fas fa-search"></i>
+            <input type="text" placeholder="Konu ara...">
+        </div>
+
+        <!-- 9. Sınıf Konuları -->
+        <div class="sinif-baslik" onclick="toggleKonular('sinif9')">
+            <h2><i class="fas fa-star"></i> 9. Sınıf Fizik Konuları</h2>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+        
+        <div class="konu-container" id="sinif9">
+            <div class="konu-kart">
+                <div class="konu-baslik">
+                    <h3><i class="fas fa-flask"></i> Fizik Bilimi ve Kariyer Keşfi</h3>
+                </div>
+                <div class="alt-konular">
+                    <ul>
+                        <li>Fizik Bilimi Nedir?</li>
+                        <li>Fizik Biliminin Alt Dalları</li>
+                        <li>Fizik Bilimine Yön Verenler</li>
+                        <li>Fizikle İlgili Meslekler</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="konu-kart">
+                <div class="konu-baslik">
+                    <h3><i class="fas fa-running"></i> Kuvvet ve Hareket</h3>
+                </div>
+                <div class="alt-konular">
+                    <ul>
+                        <li>Temel ve Türetilmiş Nicelikler</li>
+                        <li>Vektörler ve Özellikleri</li>
+                        <li>Doğadaki Temel Kuvvetler</li>
+                        <li>Hareket Türleri</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="konu-kart">
+                <div class="konu-baslik">
+                    <h3><i class="fas fa-tint"></i> Akışkanlar</h3>
+                </div>
+                <div class="alt-konular">
+                    <ul>
+                        <li>Basınç ve Özellikleri</li>
+                        <li>Sıvı Basıncı Uygulamaları</li>
+                        <li>Arşimet Prensibi</li>
+                        <li>Bernoulli İlkesi</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="konu-kart">
+                <div class="konu-baslik">
+                    <h3><i class="fas fa-bolt"></i> Enerji</h3>
+                </div>
+                <div class="alt-konular">
+                    <ul>
+                        <li>Isı ve Sıcaklık</li>
+                        <li>Hal Değişimleri</li>
+                        <li>Isıl Denge</li>
+                        <li>Isı Aktarım Yolları</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- 10. Sınıf Konuları -->
+        <div class="sinif-baslik" onclick="toggleKonular('sinif10')">
+            <h2><i class="fas fa-rocket"></i> 10. Sınıf Fizik Konuları</h2>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+        
+        <div class="konu-container" id="sinif10">
+            <div class="konu-kart">
+                <div class="konu-baslik">
+                    <h3><i class="fas fa-running"></i> Kuvvet ve Hareket</h3>
+                </div>
+                <div class="alt-konular">
+                    <ul>
+                        <li>Sabit Hızlı Hareket</li>
+                        <li>İvme ve Hız Değişimi</li>
+                        <li>Serbest Düşme</li>
+                        <li>İki Boyutta Hareket</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="konu-kart">
+                <div class="konu-baslik">
+                    <h3><i class="fas fa-bolt"></i> Enerji</h3>
+                </div>
+                <div class="alt-konular">
+                    <ul>
+                        <li>İş, Enerji ve Güç</li>
+                        <li>Mekanik Enerji</li>
+                        <li>Enerji Kaynakları</li>
+                        <li>Enerji Dönüşümleri</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="konu-kart">
+                <div class="konu-baslik">
+                    <h3><i class="fas fa-bolt"></i> Elektrik</h3>
+                </div>
+                <div class="alt-konular">
+                    <ul>
+                        <li>Ohm Yasası</li>
+                        <li>Dirençlerin Bağlanması</li>
+                        <li>Elektrik Akımının Tehlikeleri</li>
+                        <li>Topraklamanın Önemi</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="konu-kart">
+                <div class="konu-baslik">
+                    <h3><i class="fas fa-wave-square"></i> Dalgalar</h3>
+                </div>
+                <div class="alt-konular">
+                    <ul>
+                        <li>Dalga Temel Kavramlar</li>
+                        <li>Su Dalgalarında Yansıma</li>
+                        <li>Elektromanyetik Dalgalar</li>
+                        <li>Rezonans ve Deprem</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- 11. Sınıf Konuları -->
+        <div class="sinif-baslik" onclick="toggleKonular('sinif11')">
+            <h2><i class="fas fa-microscope"></i> 11. Sınıf Fizik Konuları</h2>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+        
+        <div class="konu-container" id="sinif11">
+            <div class="konu-kart">
+                <div class="konu-baslik">
+                    <h3><i class="fas fa-running"></i> Kuvvet ve Hareket</h3>
+                </div>
+                <div class="alt-konular">
+                    <ul>
+                        <li>Bağıl Hareket</li>
+                        <li>Newton'un Hareket Yasaları</li>
+                        <li>Enerji ve Hareket</li>
+                        <li>İtme ve Momentum</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="konu-kart">
+                <div class="konu-baslik">
+                    <h3><i class="fas fa-bolt"></i> Elektrik ve Manyetizma</h3>
+                </div>
+                <div class="alt-konular">
+                    <ul>
+                        <li>Elektriksel Kuvvet ve Alan</li>
+                        <li>Manyetizma</li>
+                        <li>Alternatif Akım</li>
+                        <li>Transformatörler</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="konu-kart">
+                <div class="konu-baslik">
+                    <h3><i class="fas fa-atom"></i> Madde ve Doğası</h3>
+                </div>
+                <div class="alt-konular">
+                    <ul>
+                        <li>Atom Modelleri</li>
+                        <li>Radyoaktivite</li>
+                        <li>Modern Fizik</li>
+                        <li>Nükleer Enerji</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="konu-kart">
+                <div class="konu-baslik">
+                    <h3><i class="fas fa-lightbulb"></i> Optik</h3>
+                </div>
+                <div class="alt-konular">
+                    <ul>
+                        <li>Işık ve Aydınlanma</li>
+                        <li>Yansıma ve Kırılma</li>
+                        <li>Mercekler</li>
+                        <li>Renk Olayları</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- 12. Sınıf Konuları -->
+        <div class="sinif-baslik" onclick="toggleKonular('sinif12')">
+            <h2><i class="fas fa-brain"></i> 12. Sınıf Fizik Konuları</h2>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+        
+        <div class="konu-container" id="sinif12">
+            <div class="konu-kart">
+                <div class="konu-baslik">
+                    <h3><i class="fas fa-running"></i> Kuvvet ve Hareket</h3>
+                </div>
+                <div class="alt-konular">
+                    <ul>
+                        <li>Tork ve Denge</li>
+                        <li>İtme ve Momentum</li>
+                        <li>Açısal Momentum</li>
+                        <li>Eylemsizlik Momenti</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="konu-kart">
+                <div class="konu-baslik">
+                    <h3><i class="fas fa-bolt"></i> Enerji</h3>
+                </div>
+                <div class="alt-konular">
+                    <ul>
+                        <li>Hooke Yasası</li>
+                        <li>Esneklik Potansiyel Enerjisi</li>
+                        <li>Enerjinin Korunumu</li>
+                        <li>Sistem Verimi</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="konu-kart">
+                <div class="konu-baslik">
+                    <h3><i class="fas fa-wave-square"></i> Dalgalar</h3>
+                </div>
+                <div class="alt-konular">
+                    <ul>
+                        <li>Kırınım ve Girişim</li>
+                        <li>Elektromanyetik Dalgalar</li>
+                        <li>Işık Teorileri</li>
+                        <li>Dalga Cihazları</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="konu-kart">
+                <div class="konu-baslik">
+                    <h3><i class="fas fa-atom"></i> Madde ve Doğası</h3>
+                </div>
+                <div class="alt-konular">
+                    <ul>
+                        <li>Modern Fizik</li>
+                        <li>Fotoelektrik Etki</li>
+                        <li>Standart Model</li>
+                        <li>Nükleer Enerji</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Umur Yağmur - Tüm Hakları Saklıdır</p>
+        <div class="social-links">
+            <a href="#"><i class="fab fa-youtube"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-github"></i></a>
+        </div>
+    </footer>
+
+    <script>
+        function toggleKonular(sinifId) {
+            const container = document.getElementById(sinifId);
+            const baslik = container.previousElementSibling;
+            
+            if (container.style.display === "grid") {
+                container.style.display = "none";
+                baslik.classList.remove("active");
+            } else {
+                container.style.display = "grid";
+                baslik.classList.add("active");
+            }
+        }
+        
+        // Sayfa yüklendiğinde arama kutusuna odaklan
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelector('.search-container input').focus();
+            
+            // Arama fonksiyonu
+            document.querySelector('.search-container input').addEventListener('input', function(e) {
+                const searchTerm = e.target.value.toLowerCase();
+                const allKonular = document.querySelectorAll('.konu-kart');
+                
+                allKonular.forEach(konu => {
+                    const konuText = konu.textContent.toLowerCase();
+                    if (konuText.includes(searchTerm)) {
+                        konu.style.display = "block";
+                    } else {
+                        konu.style.display = "none";
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
