@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <title>İletişim - Umur Yağmur</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    form input, form textarea {
+      width: 100%;
+      max-width: 500px;
+      padding: 10px;
+      margin-top: 5px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1em;
+    }
+
+    form button {
+      padding: 10px 20px;
+      background-color: #004080;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    form button:hover {
+      background-color: #0060c0;
+    }
+
+    ul li {
+      margin-bottom: 8px;
+    }
+
+    a {
+      color: #004080;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>İletişim</h1>
+    <nav>
+      <a href="index.html">Ana Sayfa</a>
+      <a href="dersler.html">Dersler</a>
+      <a href="blog.html">Blog</a>
+      <a href="iletisim.html">İletişim</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>📞 Benimle İletişime Geçin</h2>
+    <p>Her türlü soru, öneri veya işbirliği için aşağıdaki bilgilerden bana ulaşabilirsiniz.</p>
+
+    <ul>
+      <li>📧 <strong>E-posta:</strong> <a href="mailto:umur9871@gmail.com">umur9871@gmail.com</a></li>
+      <li>📍 <strong>Konum:</strong> Türkiye</li>
+      <li>📸 <strong>Instagram:</strong> <a href="https://instagram.com/umuryagmur_fizik" target="_blank">@umuryagmur_fizik</a></li>
+      <li>🎥 <strong>YouTube:</strong> <a href="https://www.youtube.com/@yulismayagmur" target="_blank">/yulismayagmur</a></li>
+    </ul>
+
+    <h3>📨 Mesaj Gönder</h3>
+    <form action="https://formspree.io/f/manorany" method="POST">
+      <label for="isim">Adınız:</label>
+      <input type="text" id="isim" name="isim" required>
+
+      <label for="email">E-posta:</label>
+      <input type="email" id="email" name="email" required>
+
+      <label for="mesaj">Mesajınız:</label>
+      <textarea id="mesaj" name="mesaj" rows="5" required></textarea>
+
+      <button type="submit">Gönder</button>
+    </form>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Umur Yağmur</p>
+  </footer>
+  <!-- </body> kapanış etiketinden HEMEN ÖNCE ekle -->
+<script>
+  // Tema anahtarı: localStorage'da saklanır.
+  const toggleTheme = () => {
+    document.body.classList.toggle('dark');
+    localStorage.setItem('theme', document.body.classList.contains('dark') ? 'dark' : 'light');
+  };
+  // Sayfa her yüklendiğinde kullanıcı tercihini uygula
+  window.addEventListener('DOMContentLoaded', () => {
+    if (localStorage.getItem('theme') === 'dark') document.body.classList.add('dark');
+  });
+</script>
+
+</body>
+</html>
+
