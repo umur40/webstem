@@ -1,0 +1,238 @@
+/* Genel Ayarlar */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background: #f0f4f8;
+  color: #333;
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Container */
+.container {
+  width: 90%;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* Header */
+header {
+  background-color: #004080;
+  color: white;
+  padding: 20px 0;
+}
+
+header h1 {
+  font-size: 2.8rem;
+  text-align: center;
+}
+
+header .subtitle {
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 400;
+  margin-top: 5px;
+  opacity: 0.8;
+}
+
+nav {
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+}
+
+nav a {
+  color: white;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 1.1rem;
+  padding: 5px 10px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+nav a:hover, nav a.active {
+  background-color: #0070ff;
+}
+
+/* Ana Bölüm */
+main {
+  flex-grow: 1;
+  padding: 40px 0;
+}
+
+/* Hero Bölümü */
+.hero {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 40px;
+  margin-bottom: 60px;
+}
+
+.hero-text {
+  flex: 1 1 400px;
+}
+
+.hero-text h2 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  color: #004080;
+}
+
+.hero-text p {
+  font-size: 1.1rem;
+  margin-bottom: 25px;
+  color: #555;
+}
+
+.btn {
+  background-color: #004080;
+  color: white;
+  padding: 12px 25px;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #0070ff;
+}
+
+/* Atom Animasyonu */
+
+.atom-animation {
+  position: relative;
+  width: 180px;
+  height: 180px;
+  margin: 0 auto;
+}
+
+/* Çekirdek */
+.nucleus {
+  width: 40px;
+  height: 40px;
+  background: #004080;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 10px #0070ff88;
+}
+
+/* Elektronlar */
+.electron {
+  width: 15px;
+  height: 15px;
+  background: #0070ff;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform-origin: -70px 0;
+  animation-timing-function: linear;
+  box-shadow: 0 0 6px #00aaffcc;
+}
+
+.electron1 {
+  animation: spin 4s linear infinite;
+  transform-origin: -70px 0;
+}
+
+.electron2 {
+  animation: spin 6s linear infinite;
+  transform-origin: -50px 0;
+  animation-delay: 1.5s;
+}
+
+.electron3 {
+  animation: spin 8s linear infinite;
+  transform-origin: -90px 0;
+  animation-delay: 0.7s;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg) translateX(70px) rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg) translateX(70px) rotate(-360deg);
+  }
+}
+
+/* Özellikler Bölümü */
+.features {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 30px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.feature {
+  background: white;
+  flex: 1 1 300px;
+  padding: 25px 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 14px rgb(0 0 0 / 0.1);
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.feature:hover {
+  transform: translateY(-8px);
+}
+
+.feature h3 {
+  font-size: 1.4rem;
+  color: #004080;
+  margin-bottom: 15px;
+}
+
+.feature p {
+  font-size: 1rem;
+  color: #444;
+}
+
+/* Footer */
+footer {
+  background-color: #002050;
+  color: #ccc;
+  text-align: center;
+  padding: 15px 10px;
+  font-size: 0.9rem;
+}
+
+footer a {
+  color: #66aaff;
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero {
+    flex-direction: column;
+  }
+
+  .features {
+    flex-direction: column;
+  }
+}
