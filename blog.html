@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fizik Hayatın İçinde | Umur Yağmur</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3a0ca3;
+            --accent: #f72585;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #4cc9f0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: var(--dark);
+            line-height: 1.7;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 3rem 0 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: pulse 15s infinite linear;
+        }
+        
+        @keyframes pulse {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            position: relative;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            animation: fadeInDown 1s ease;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+            position: relative;
+            animation: fadeIn 1.2s ease;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 0.6rem 1.2rem;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            background-color: rgba(255,255,255,0.1);
+            border: 2px solid rgba(255,255,255,0.2);
+        }
+        
+        nav a:hover {
+            background-color: rgba(255,255,255,0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        main {
+            max-width: 900px;
+            margin: 3rem auto;
+            padding: 0 1.5rem;
+        }
+        
+        .intro {
+            font-size: 1.2rem;
+            background: linear-gradient(135deg, rgba(67,97,238,0.1), rgba(58,12,163,0.1));
+            padding: 2rem;
+            border-radius: 12px;
+            margin-bottom: 3rem;
+            border-left: 5px solid var(--primary);
+            animation: fadeInUp 0.8s ease;
+        }
+        
+        .content-box {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            margin-bottom: 2.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            animation: fadeIn 0.8s ease forwards;
+            opacity: 0;
+        }
+        
+        .content-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        }
+        
+        .content-box::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--accent), var(--success));
+        }
+        
+        h2 {
+            color: var(--primary);
+            margin: 0 0 1.5rem;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        
+        h2 i {
+            color: var(--accent);
+        }
+        
+        ul {
+            margin: 1.5rem 0;
+            padding-left: 1.5rem;
+        }
+        
+        li {
+            margin-bottom: 0.8rem;
+            position: relative;
+            padding-left: 1.2rem;
+        }
+        
+        li::before {
+            content: "▹";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+        
+        .bonus {
+            background-color: rgba(255,214,0,0.15);
+            padding: 1.2rem;
+            border-left: 4px solid var(--accent);
+            margin: 1.5rem 0;
+            border-radius: 0 8px 8px 0;
+            animation: pulseLight 2s infinite;
+        }
+        
+        @keyframes pulseLight {
+            0% { box-shadow: 0 0 0 0 rgba(247,37,133,0.2); }
+            70% { box-shadow: 0 0 0 10px rgba(247,37,133,0); }
+            100% { box-shadow: 0 0 0 0 rgba(247,37,133,0); }
+        }
+        
+        .conclusion {
+            background: linear-gradient(135deg, rgba(76,201,240,0.1), rgba(67,97,238,0.1));
+            padding: 2.5rem;
+            border-radius: 12px;
+            margin-top: 4rem;
+            text-align: center;
+            border: 1px dashed var(--success);
+            animation: fadeInUp 1s ease;
+        }
+        
+        .conclusion h2 {
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .conclusion ul {
+            display: inline-block;
+            text-align: left;
+            margin: 1.5rem auto;
+        }
+        
+        .highlight {
+            background-color: rgba(255,214,0,0.3);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        
+        footer {
+            background-color: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 4rem;
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Delay animations for content boxes */
+        .content-box:nth-child(1) { animation-delay: 0.2s; }
+        .content-box:nth-child(2) { animation-delay: 0.4s; }
+        .content-box:nth-child(3) { animation-delay: 0.6s; }
+        .content-box:nth-child(4) { animation-delay: 0.8s; }
+        .content-box:nth-child(5) { animation-delay: 1s; }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .intro, .content-box, .conclusion {
+                padding: 1.5rem;
+            }
+            
+            nav {
+                gap: 0.8rem;
+            }
+            
+            nav a {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Fizik Hayatın İçinde</h1>
+        <p style="opacity: 0.9; margin-bottom: 1.5rem; animation: fadeIn 1s ease;">Gökkuşağından Kırılan Kaşığa Günlük Sihirin Bilimi</p>
+        <nav>
+            <a href="index.html"><i class="fas fa-home"></i> Ana Sayfa</a>
+            <a href="dersler.html"><i class="fas fa-graduation-cap"></i> Dersler</a>
+            <a href="blog.html"><i class="fas fa-blog"></i> Blog</a>
+            <a href="iletisim.html"><i class="fas fa-envelope"></i> İletişim</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="intro">
+            Fizik deyince aklınıza sadece karmaşık denklemler ve laboratuvar deneyleri mi geliyor? Aslında fizik, <span class="highlight">hayatımızın her anında</span> karşımıza çıkan büyülü olayları açıklayan bir bilim! Gökkuşağının renk cümbüşünden, bardaktaki kaşığın bükülmüş görünmesine kadar her şeyin arkasında <span class="highlight">fizik yasaları</span> yatıyor.
+        </div>
+
+        <div class="content-box">
+            <h2><i class="fas fa-rainbow"></i> Gökkuşağı Nasıl Oluşur?</h2>
+            <p>Güneşli bir günde yağmur yağdıktan sonra gökyüzünde beliren renk şöleni, aslında <span class="highlight">ışığın su damlalarıyla dansı</span>!</p>
+            
+            <ul>
+                <li><strong>Işık Su Damlasına Girince Kırılır</strong>: Güneş ışınları yağmur damlalarına çarptığında yön değiştirir (kırılma).</li>
+                <li><strong>İçeride Yansır ve Yeniden Kırılır</strong>: Işık damlanın iç yüzeyinden yansıdıktan sonra tekrar kırılarak dışarı çıkar.</li>
+                <li><strong>Beyaz Işık Renklere Ayrılır</strong>: Gökkuşağındaki <strong>7 renk (kırmızı, turuncu, sarı, yeşil, mavi, lacivert, mor)</strong>, aslında beyaz ışığın bileşenleridir.</li>
+            </ul>
+            
+            <div class="bonus">
+                <strong><i class="fas fa-lightbulb"></i> Bonus Bilgi:</strong> Çift gökkuşağı gördüyseniz, bu ışığın damlada <strong>iki kez yansıması</strong> sayesinde oluşur!
+            </div>
+        </div>
+
+        <div class="content-box">
+            <h2><i class="fas fa-utensils"></i> Bardağa Koyduğunuz Kaşık Neden Kırık Görünür?</h2>
+            <p>Bir bardak suya kaşık koyduğunuzda, sanki <span class="highlight">kaşık suyun içinde bükülmüş gibi</span> görünür. Bunun sebebi <span class="highlight">ışığın kırılması</span>!</p>
+            
+            <ul>
+                <li><strong>Işık Sudan Havaya Geçerken Yavaşlar</strong>: Su, havadan daha yoğundur, bu yüzden ışık yön değiştirir.</li>
+                <li><strong>Gözümüz Yanılır</strong>: Beynimiz ışığın düz bir çizgide geldiğini varsayar, bu yüzden kaşığın su altındaki kısmı <strong>yer değiştirmiş gibi</strong> görünür.</li>
+            </ul>
+            
+            <p style="margin-top: 1.5rem;"><strong><i class="fas fa-flask"></i> Deney Yapın!</strong> Bir kalemi yarısı suda olacak şekilde bardağa koyun ve nasıl "kırıldığını" gözlemleyin.</p>
+        </div>
+
+        <div class="content-box">
+            <h2><i class="fas fa-mug-hot"></i> Sıcak Çay Neden Bardağın Kenarından Isınır?</h2>
+            <p>Sıcak bir çayı bekletirken, bardağın <span class="highlight">kenarlarının daha sıcak</span>, ortasının daha serin olduğunu fark ettiniz mi?</p>
+            
+            <ul>
+                <li><strong>Konveksiyon Akımları</strong>: Sıvılar ısındıkça genleşir ve yükselir. Bu yüzden sıcak su bardağın <strong>kenarlarından yukarı çıkar</strong>, soğuk su ise <strong>dibe çöker</strong>.</li>
+                <li><strong>Isı Enerjisi Taşınır</strong>: Bu döngü, çayın eşit şekilde ısınmasını sağlar.</li>
+            </ul>
+            
+            <div style="margin-top: 1.5rem; display: flex; align-items: center; gap: 0.5rem; color: var(--accent);">
+                <i class="fas fa-arrow-up" style="animation: bounce 2s infinite;"></i>
+                <span>Isınan su yükselirken soğuk su aşağı iner</span>
+            </div>
+        </div>
+
+        <div class="content-box">
+            <h2><i class="fas fa-plane"></i> Uçaklar Nasıl Havada Kalır?</h2>
+            <p>Tonlarca ağırlıktaki bir uçak, <span class="highlight">nasıl oluyor da gökyüzünde süzülüyor?</span></p>
+            
+            <ul>
+                <li><strong>Kanatların Özel Tasarımı</strong>: Uçak kanatlarının <strong>üst kısmı daha kavislidir</strong>, bu da havanın üstten daha hızlı akmasını sağlar.</li>
+                <li><strong>Bernoulli İlkesi</strong>: Hızlı hareket eden hava, <strong>düşük basınç</strong> oluşturur. Kanadın altındaki yüksek basınç, uçağı <strong>yukarı iter</strong> (kaldırma kuvveti).</li>
+            </ul>
+            
+            <div class="bonus">
+                <strong><i class="fas fa-info-circle"></i> Eğlenceli Bilgi:</strong> Uçakların arkasındaki <strong>türbülans</strong>, hava akışının düzensizleşmesiyle oluşur.
+            </div>
+        </div>
+
+        <div class="content-box">
+            <h2><i class="fas fa-water"></i> Ses Neden Suda Daha Hızlı Yayılır?</h2>
+            <p>Havada duyduğunuz bir ses, suyun altında <span class="highlight">daha net ve hızlı</span> iletiliyor. Peki neden?</p>
+            
+            <ul>
+                <li><strong>Moleküllerin Yakınlığı</strong>: Su molekülleri, havadakilere göre <strong>daha sıkı dizilidir</strong>. Bu yüzden ses dalgaları daha hızlı iletilir.</li>
+                <li><strong>Hız Farkı</strong>: Ses, havada <strong>343 m/s</strong>, suda ise <strong>1.480 m/s</strong> hızla ilerler!</li>
+            </ul>
+            
+            <p style="margin-top: 1.5rem;"><strong><i class="fas fa-submarine"></i> Denizaltılar</strong> bu yüzden su altı iletişimde <strong>özel sonar sistemleri</strong> kullanır.</p>
+        </div>
+
+        <div class="conclusion">
+            <h2><i class="fas fa-globe"></i> Fizik Her Yerde!</h2>
+            <p>Fizik, <span class="highlight">sadece formüllerden ibaret değil</span>; hayatımızın her anında karşımıza çıkıyor!</p>
+            
+            <ul>
+                <li><strong>Gökkuşağı</strong> → Işığın kırılması</li>
+                <li><strong>Kırık görünen kaşık</strong> → Işığın sudaki yansıması</li>
+                <li><strong>Uçakların uçması</strong> → Bernoulli prensibi</li>
+                <li><strong>Sıcak çayın hareketi</strong> → Konveksiyon akımları</li>
+            </ul>
+            
+            <p style="margin-top: 1.5rem; font-weight: 600;">Bir dahaki sefere bu olaylardan birini gözlemlediğinizde, arkasındaki fiziği düşünün!</p>
+            
+            <p style="font-size: 1.2rem; margin-top: 2rem; color: var(--accent);">
+                <em>Sizin merak ettiğiniz günlük fizik olayları neler? Yorumlarda paylaşın!</em> <i class="fas fa-lightbulb" style="color: var(--accent);"></i>
+            </p>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Umur Yağmur - Tüm Hakları Saklıdır</p>
+        <div style="display: flex; justify-content: center; gap: 1.5rem; margin-top: 1rem;">
+            <a href="#" style="color: white; font-size: 1.2rem;"><i class="fab fa-youtube"></i></a>
+            <a href="#" style="color: white; font-size: 1.2rem;"><i class="fab fa-instagram"></i></a>
+            <a href="#" style="color: white; font-size: 1.2rem;"><i class="fab fa-twitter"></i></a>
+            <a href="#" style="color: white; font-size: 1.2rem;"><i class="fab fa-github"></i></a>
+        </div>
+    </footer>
+
+    <script>
+        // Add bounce animation for fun
+        document.addEventListener('DOMContentLoaded', function() {
+            const headings = document.querySelectorAll('h2');
+            
+            headings.forEach(heading => {
+                heading.addEventListener('mouseover', function() {
+                    this.style.animation = 'bounce 0.5s';
+                });
+                
+                heading.addEventListener('animationend', function() {
+                    this.style.animation = '';
+                });
+            });
+            
+            // Animate content boxes when they come into view
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1;
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            document.querySelectorAll('.content-box').forEach(box => {
+                observer.observe(box);
+            });
+        });
+    </script>
+</body>
+</html>
